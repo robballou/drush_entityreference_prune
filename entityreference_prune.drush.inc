@@ -8,7 +8,7 @@
 function entityreference_prune_drush_command() {
   $commands = array();
 
-  $commands['entityreference_prune'] = array(
+  $commands['entityreference-prune'] = array(
     'callback' => 'drush_entityreference_prune',
     'description' => 'Prune duplicate entity references',
     'aliases' => array('erp'),
@@ -36,7 +36,7 @@ function drush_entityreference_prune($field_name) {
 
     $results = db_query('SELECT entity_id, ' . $field . ', COUNT(' . $field . ') AS c
       FROM ' . $data . ' GROUP BY entity_id, ' . $field);
-    
+
     while ($result = $results->fetchAssoc()) {
 
       if ($result['c'] > 1) {
@@ -52,4 +52,3 @@ function drush_entityreference_prune($field_name) {
   }
 
 }
-
