@@ -12,6 +12,6 @@ Helps prune duplicate entity reference values.
 ## Install
 
     pushd ~/.drush/
-    git clone git@github.com:robballou/drush_entityreference_prune.git
+    git clone https://github.com/robballou/drush_entityreference_prune.git
     popd
     drush cache-clear drush
