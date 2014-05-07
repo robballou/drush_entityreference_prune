@@ -42,8 +42,13 @@ function drush_entityreference_prune($field_name) {
       if ($result['c'] > 1) {
 
         $limit = intval($result['c']) - 1;
-        db_query('DELETE FROM ' . $data . ' WHERE entity_id=' . intval($result['entity_id']) . ' AND ' . $field . '=' . intval($result[$field]) . ' LIMIT ' . $limit);
-        drush_log('Cleaned duplicates for entity_id: ' . $result['entity_id'] . ' target_id:' . $result[$field], 'ok');
+        if ($limit > 0) {
+          db_query('DELETE FROM ' . $data . ' WHERE entity_id=:entity AND ' . $field . '=:target LIMIT ' . $limit, array(
+            ':entity' => intval($result['entity_id']),
+            ':target' => intval($result[$field]),
+          ));
+          drush_log('Cleaned duplicates for entity_id: ' . $result['entity_id'] . ' target_id:' . $result[$field], 'ok');
+        }
 
       }
 
